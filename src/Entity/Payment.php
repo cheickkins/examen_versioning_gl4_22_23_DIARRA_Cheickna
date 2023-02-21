@@ -14,17 +14,16 @@ class Payment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 64)]
-    private ?string $reference = null;
+    #[ORM\Column(length: 255)]
+    private ?string $ref = null;
 
-    #[ORM\OneToOne(inversedBy: 'payment', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Order $order_ = null;
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Order $order_id = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $payed_at = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 255)]
     private ?string $mode = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -35,26 +34,26 @@ class Payment
         return $this->id;
     }
 
-    public function getReference(): ?string
+    public function getRef(): ?string
     {
-        return $this->reference;
+        return $this->ref;
     }
 
-    public function setReference(string $reference): self
+    public function setRef(string $ref): self
     {
-        $this->reference = $reference;
+        $this->ref = $ref;
 
         return $this;
     }
 
-    public function getOrder(): ?Order
+    public function getOrderId(): ?Order
     {
-        return $this->order_;
+        return $this->order_id;
     }
 
-    public function setOrder(Order $order_): self
+    public function setOrderId(?Order $order_id): self
     {
-        $this->order_ = $order_;
+        $this->order_id = $order_id;
 
         return $this;
     }

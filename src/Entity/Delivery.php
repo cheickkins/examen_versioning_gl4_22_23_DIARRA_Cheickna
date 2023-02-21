@@ -13,29 +13,26 @@ class Delivery
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $address = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 255)]
     private ?string $zipcode = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $city = null;
 
     #[ORM\Column]
-    private ?float $price = null;
+    private ?int $price = null;
 
-    #[ORM\Column(length: 25)]
+    #[ORM\Column(length: 255)]
     private ?string $state = null;
 
     #[ORM\ManyToOne(inversedBy: 'deliveries')]
-    private ?Order $order_ = null;
-
-    #[ORM\ManyToOne]
-    private ?User $delivered_by = null;
+    private ?Order $order_id = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $delivered_at = null;
+    private ?int $delivery_by = null;
 
     public function getId(): ?int
     {
@@ -78,12 +75,12 @@ class Delivery
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPrice(): ?int
     {
         return $this->price;
     }
 
-    public function setPrice(float $price): self
+    public function setPrice(int $price): self
     {
         $this->price = $price;
 
@@ -102,38 +99,26 @@ class Delivery
         return $this;
     }
 
-    public function getOrder(): ?Order
+    public function getOrderId(): ?Order
     {
-        return $this->order_;
+        return $this->order_id;
     }
 
-    public function setOrder(?Order $order_): self
+    public function setOrderId(?Order $order_id): self
     {
-        $this->order_ = $order_;
+        $this->order_id = $order_id;
 
         return $this;
     }
 
-    public function getDeliveredBy(): ?User
+    public function getDeliveryBy(): ?int
     {
-        return $this->delivered_by;
+        return $this->delivery_by;
     }
 
-    public function setDeliveredBy(?User $delivered_by): self
+    public function setDeliveryBy(int $delivery_by): self
     {
-        $this->delivered_by = $delivered_by;
-
-        return $this;
-    }
-
-    public function getDeliveredAt(): ?\DateTimeImmutable
-    {
-        return $this->delivered_at;
-    }
-
-    public function setDeliveredAt(\DateTimeImmutable $delivered_at): self
-    {
-        $this->delivered_at = $delivered_at;
+        $this->delivery_by = $delivery_by;
 
         return $this;
     }
